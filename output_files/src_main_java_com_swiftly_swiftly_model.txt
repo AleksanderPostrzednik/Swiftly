@@ -1,6 +1,9 @@
-package com.swiftly.swiftlly.model;
+﻿Plik: src\main\java\com\swiftly\swiftly\model\SwiftCode.java
+package com.swiftly.swiftly.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "swift_codes")  // nazwa tabeli w bazie
@@ -22,6 +25,8 @@ public class SwiftCode {
     @Column(name = "country_name", nullable = false)
     private String countryName;
 
+    @Getter
+    @Setter
     @Column(name = "address")
     private String address;
 
@@ -45,8 +50,6 @@ public class SwiftCode {
         this.address = address;
         this.isHeadquarter = isHeadquarter;
     }
-
-    // gettery i settery
 
     public Long getId() {
         return id;
@@ -88,14 +91,6 @@ public class SwiftCode {
         this.countryName = countryName;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public boolean isHeadquarter() {
         return isHeadquarter;
     }
@@ -104,3 +99,4 @@ public class SwiftCode {
         isHeadquarter = headquarter;
     }
 }
+======================
