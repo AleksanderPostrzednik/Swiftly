@@ -1,9 +1,10 @@
 package com.swiftly.swiftly.service;
 
 import com.swiftly.swiftly.model.SwiftCode;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -21,19 +22,44 @@ public class ExcelParserService {
     public void parseAndSave(InputStream excelFile) throws IOException {
         try (XSSFWorkbook workbook = new XSSFWorkbook(excelFile)) {
             XSSFSheet sheet = workbook.getSheetAt(0);
+
             for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
                 Row row = sheet.getRow(rowIndex);
-                if (row == null) continue;
+                if (row == null) {
+                    continue;
+                }
 
-                String countryISO2 = row.getCell(0).getStringCellValue();
-                String swiftCode = row.getCell(1).getStringCellValue();
-                String bankName = row.getCell(3).getStringCellValue();
-                String address = row.getCell(4).getStringCellValue();
-                String countryName = row.getCell(6).getStringCellValue();
+                String countryISO2 = getCellValue(row, 0);
+                String swiftCode    = getCellValue(row, 1);
 
-                SwiftCode code = new SwiftCode(swiftCode, bankName, countryISO2, countryName, address, swiftCode.endsWith("XXX"));
+                String bankName     = getCellValue(row, 3);
+                String address      = getCellValue(row, 4);
+
+                String countryName  = getCellValue(row, 6);
+
+                if (countryISO2.isEmpty() && swiftCode.isEmpty() && bankName.isEmpty()) {
+                    continue;
+                }
+
+                SwiftCode code = new SwiftCode(
+                        swiftCode,
+                        bankName,
+                        countryISO2,
+                        countryName,
+                        address,
+                        false
+                );
+
                 swiftCodeService.createSwiftCode(code);
             }
         }
+    }
+
+    private String getCellValue(Row row, int cellIndex) {
+        Cell cell = row.getCell(cellIndex);
+        if (cell == null) {
+            return "";
+        }
+        return cell.toString().trim();
     }
 }

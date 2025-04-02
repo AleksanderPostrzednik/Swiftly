@@ -4,12 +4,12 @@ import com.swiftly.swiftly.dto.SwiftCodeRequest;
 import com.swiftly.swiftly.model.SwiftCode;
 import com.swiftly.swiftly.service.ExcelParserService;
 import com.swiftly.swiftly.service.SwiftCodeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -21,7 +21,8 @@ public class SwiftCodeController {
     private final SwiftCodeService swiftCodeService;
     private final ExcelParserService excelParserService;
 
-    public SwiftCodeController(SwiftCodeService swiftCodeService, ExcelParserService excelParserService) {
+    public SwiftCodeController(SwiftCodeService swiftCodeService,
+                               ExcelParserService excelParserService) {
         this.swiftCodeService = swiftCodeService;
         this.excelParserService = excelParserService;
     }
@@ -48,6 +49,7 @@ public class SwiftCodeController {
                 false
         );
         SwiftCode saved = swiftCodeService.createSwiftCode(code);
-        return ResponseEntity.ok(Map.of("message", "SWIFT code added successfully", "swiftCode", saved.getSwiftCode()));
+        return ResponseEntity.ok(Map.of("message", "SWIFT code added successfully",
+                "swiftCode", saved.getSwiftCode()));
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class SwiftCodeService {
@@ -28,6 +27,7 @@ public class SwiftCodeService {
     }
 
     public SwiftCode createSwiftCode(SwiftCode code) {
+
         code.setCountryISO2(code.getCountryISO2().toUpperCase());
         code.setCountryName(code.getCountryName().toUpperCase());
 
@@ -47,20 +47,10 @@ public class SwiftCodeService {
     }
 
     public boolean isHeadquarterCode(String swiftCode) {
-        if (swiftCode.length() <= 8) return true;
+
+        if (swiftCode.length() <= 8) {
+            return true;
+        }
         return swiftCode.length() == 11 && swiftCode.endsWith("XXX");
-    }
-
-    public List<SwiftCode> getBranchesForHQ(String swiftCodeHQ) {
-        String prefix8 = swiftCodeHQ.substring(0, 8);
-        List<SwiftCode> allSamePrefix = swiftCodeRepository.findAll()
-                .stream()
-                .filter(sc -> sc.getSwiftCode().startsWith(prefix8))
-                .toList();
-
-        // odfiltruj HQ (same prefix, ale jestHeadquarter = true)
-        return allSamePrefix.stream()
-                .filter(sc -> !sc.isHeadquarter())
-                .collect(Collectors.toList());
     }
 }

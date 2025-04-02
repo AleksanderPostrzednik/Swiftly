@@ -32,9 +32,15 @@ public class SwiftCode {
     @Column(name = "is_headquarter", nullable = false)
     private boolean isHeadquarter;
 
-    public SwiftCode() {}
+    public SwiftCode() {
+    }
 
-    public SwiftCode(String swiftCode, String bankName, String countryISO2, String countryName, String address, boolean isHeadquarter) {
+    public SwiftCode(String swiftCode,
+                     String bankName,
+                     String countryISO2,
+                     String countryName,
+                     String address,
+                     boolean isHeadquarter) {
         this.swiftCode = swiftCode;
         this.bankName = bankName;
         this.countryISO2 = countryISO2;
