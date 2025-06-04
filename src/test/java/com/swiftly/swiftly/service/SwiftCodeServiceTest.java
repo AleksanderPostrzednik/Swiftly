@@ -14,5 +14,7 @@ class SwiftCodeServiceTest {
         Assertions.assertTrue(service.isHeadquarterCode("ABCDEF12"));
         Assertions.assertTrue(service.isHeadquarterCode("ABCDEF12XXX"));
         Assertions.assertFalse(service.isHeadquarterCode("ABCDEF12345"));
+        Assertions.assertFalse(service.isHeadquarterCode("SHORT"));
+        Assertions.assertFalse(service.isHeadquarterCode(null));
     }
 }
