@@ -2,6 +2,7 @@ package com.swiftly.swiftly.service;
 
 import com.swiftly.swiftly.model.SwiftCode;
 import com.swiftly.swiftly.repository.SwiftCodeRepository;
+import com.swiftly.swiftly.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,7 @@ public class SwiftCodeService {
         if (existing != null) {
             swiftCodeRepository.delete(existing);
         } else {
-            throw new RuntimeException("SWIFT code not found: " + swiftCode);
+            throw new ResourceNotFoundException("SWIFT code not found: " + swiftCode);
         }
     }
 
