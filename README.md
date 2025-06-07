@@ -160,10 +160,10 @@ spring.jpa.show-sql=true
 |--------|----------|-------------|
 | GET    | `/` | Simple welcome endpoint. Returns "Witaj w aplikacji Swiftly!" |
 | POST   | `/v1/swift-codes/import` | Imports an Excel file. Requires form-data with key `file` |
-| GET    | `/v1/swift-codes/{swiftCode}` | Returns details for a single SWIFT code. Includes "branches" for HQ codes |
+| GET    | `/v1/swift-codes/{swiftCode}` | Returns details for a single SWIFT code (404 if not found) |
 | GET    | `/v1/swift-codes/country/{iso2}` | Returns all codes for the specified ISO2 country code |
 | POST   | `/v1/swift-codes` | Creates a new SWIFT code entry |
-| DELETE | `/v1/swift-codes/{swiftCode}` | Deletes the specified code |
+| DELETE | `/v1/swift-codes/{swiftCode}` | Deletes the specified code (404 if not found) |
 
 ### Examples
 

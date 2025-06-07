@@ -27,6 +27,31 @@ public class SwiftCodeController {
         this.excelParserService = excelParserService;
     }
 
+    @GetMapping("/{swiftCode}")
+    public ResponseEntity<?> getSwiftCode(@PathVariable String swiftCode) {
+        SwiftCode code = swiftCodeService.getBySwiftCode(swiftCode);
+        if (code == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", "SWIFT code not found: " + swiftCode));
+        }
+        return ResponseEntity.ok(code);
+    }
+
+    @GetMapping("/country/{iso2}")
+    public ResponseEntity<?> getSwiftCodesByCountry(@PathVariable String iso2) {
+        return ResponseEntity.ok(swiftCodeService.getAllForCountry(iso2));
+    }
+
+    @DeleteMapping("/{swiftCode}")
+    public ResponseEntity<?> deleteSwiftCode(@PathVariable String swiftCode) {
+        try {
+            swiftCodeService.deleteBySwiftCode(swiftCode);
+            return ResponseEntity.ok(Map.of("message", "Deleted"));
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", ex.getMessage()));
+        }
+    }
     @PostMapping("/import")
     public ResponseEntity<?> importSwiftCodes(@RequestParam("file") MultipartFile file) {
         try (InputStream is = file.getInputStream()) {
