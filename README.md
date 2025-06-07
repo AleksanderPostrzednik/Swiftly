@@ -200,9 +200,11 @@ spring.jpa.show-sql=true
 ### Unit Tests
 - `SwiftCodeServiceTest.java` verifies service methods (e.g., `isHeadquarterCode`)
 - Run with `mvn test`
+  (uses the `test` profile with an in-memory H2 database)
 
 ### Integration Tests
 - `SwiftlyApplicationTests.java` ensures the application context loads correctly and verifies repository CRUD operations
+- Tests run against H2, so PostgreSQL is **not** required for executing tests
 
 ## Common Issues & Solutions
 
