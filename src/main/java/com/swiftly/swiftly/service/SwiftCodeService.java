@@ -48,10 +48,14 @@ public class SwiftCodeService {
     }
 
     public boolean isHeadquarterCode(String swiftCode) {
+        if (swiftCode == null) {
+            return false;
+        }
 
-        if (swiftCode.length() <= 8) {
+        if (swiftCode.length() == 8) {
             return true;
         }
+
         return swiftCode.length() == 11 && swiftCode.endsWith("XXX");
     }
 }
