@@ -2,11 +2,6 @@ package com.swiftly.swiftly.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class SwiftCodeRequest {
 
     @NotBlank(message = "SWIFT code cannot be blank")
@@ -24,4 +19,44 @@ public class SwiftCodeRequest {
     private String countryName;
 
     private String address;
+
+    public String getSwiftCode() {
+        return swiftCode;
+    }
+
+    public void setSwiftCode(String swiftCode) {
+        this.swiftCode = swiftCode;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public String getCountryISO2() {
+        return countryISO2;
+    }
+
+    public void setCountryISO2(String countryISO2) {
+        this.countryISO2 = countryISO2;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

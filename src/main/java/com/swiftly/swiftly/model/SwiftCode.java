@@ -1,13 +1,9 @@
 package com.swiftly.swiftly.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "swift_codes")
-@Getter
-@Setter
 public class SwiftCode {
 
     @Id
@@ -47,5 +43,61 @@ public class SwiftCode {
         this.countryName = countryName;
         this.address = address;
         this.isHeadquarter = isHeadquarter;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getSwiftCode() {
+        return swiftCode;
+    }
+
+    public void setSwiftCode(String swiftCode) {
+        this.swiftCode = swiftCode;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public String getCountryISO2() {
+        return countryISO2;
+    }
+
+    public void setCountryISO2(String countryISO2) {
+        this.countryISO2 = countryISO2;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public boolean isHeadquarter() {
+        return isHeadquarter;
+    }
+
+    public void setHeadquarter(boolean headquarter) {
+        isHeadquarter = headquarter;
     }
 }
