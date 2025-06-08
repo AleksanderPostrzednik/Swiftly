@@ -2,6 +2,10 @@ package com.swiftly.swiftly.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+/**
+ * Simple DTO used for creating new {@code SwiftCode} entries via the REST API.
+ */
 public class SwiftCodeRequest {
 
     @NotBlank(message = "SWIFT code cannot be blank")
@@ -19,6 +23,9 @@ public class SwiftCodeRequest {
     private String countryName;
 
     private String address;
+
+    public SwiftCodeRequest() {
+    }
 
     public String getSwiftCode() {
         return swiftCode;
