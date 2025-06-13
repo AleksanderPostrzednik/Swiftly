@@ -44,13 +44,8 @@ public class SwiftCodeController {
 
     @DeleteMapping("/{swiftCode}")
     public ResponseEntity<?> deleteSwiftCode(@PathVariable String swiftCode) {
-        try {
-            swiftCodeService.deleteBySwiftCode(swiftCode);
-            return ResponseEntity.ok(Map.of("message", "Deleted"));
-        } catch (RuntimeException ex) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(Map.of("error", ex.getMessage()));
-        }
+        swiftCodeService.deleteBySwiftCode(swiftCode);
+        return ResponseEntity.ok(Map.of("message", "Deleted"));
     }
     @PostMapping("/import")
     public ResponseEntity<?> importSwiftCodes(@RequestParam("file") MultipartFile file) {
@@ -74,7 +69,8 @@ public class SwiftCodeController {
                 false
         );
         SwiftCode saved = swiftCodeService.createSwiftCode(code);
-        return ResponseEntity.ok(Map.of("message", "SWIFT code added successfully",
-                "swiftCode", saved.getSwiftCode()));
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(Map.of("message", "SWIFT code added successfully",
+                        "swiftCode", saved.getSwiftCode()));
     }
 }
