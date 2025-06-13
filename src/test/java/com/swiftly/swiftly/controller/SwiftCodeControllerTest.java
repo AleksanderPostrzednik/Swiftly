@@ -2,6 +2,7 @@ package com.swiftly.swiftly.controller;
 
 import com.swiftly.swiftly.service.ExcelParserService;
 import com.swiftly.swiftly.service.SwiftCodeService;
+import com.swiftly.swiftly.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -42,7 +43,7 @@ class SwiftCodeControllerTest {
 
     @Test
     void deleteSwiftCodeNotFound() throws Exception {
-        doThrow(new RuntimeException("SWIFT code not found: UNKNOWN"))
+        doThrow(new ResourceNotFoundException("SWIFT code not found: UNKNOWN"))
                 .when(swiftCodeService).deleteBySwiftCode("UNKNOWN");
         mockMvc.perform(delete("/v1/swift-codes/UNKNOWN"))
                 .andExpect(status().isNotFound());
